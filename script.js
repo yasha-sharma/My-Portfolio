@@ -96,3 +96,31 @@ viewButton.forEach((view) => {
     }
   });
 });
+
+// --- Form Submission Logic: Handle clearing fields ---
+
+const contactForm = document.querySelector(".contact-form");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", function (e) {
+    // 1. **Crucial Step**: Stop the page from refreshing/submitting normally
+    e.preventDefault();
+
+    // Collect the data from the form fields
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+
+    // Build the mailto link manually
+    const mailToLink = `mailto:yasha.sharma@powercoders.org?subject=Portfolio Contact from ${name}&body=Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+
+    // 2. Open the email client with the data
+    window.location.href = mailToLink;
+
+    // 3. **Reset the form fields**
+    contactForm.reset();
+
+    // Optional: Give the user feedback that the data was processed
+    alert("Thank you! Your email client should now open with your message.");
+  });
+}
