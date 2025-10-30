@@ -1,0 +1,479 @@
+/* ---- NEW COLOR PALETTE & FONT STACK ---- */
+:root {
+  --purple: #6f42c1; /* Body Background: Deep Violet */
+  --pink: #e83e8c; /* Accent Color: Deep Pink */
+  --text-dark: #212529; /* Dark text for light backgrounds */
+  --text-light: #ffffff; /* White text for dark backgrounds */
+  --font-sans-serif: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  --bg-section: #ffffff; /* White background for all sections/cards */
+  /* Subtle, modern shadow */
+  --shadow-light: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 15px 40px rgba(0, 0, 0, 0.15);
+  /* Header Colors */
+  --header-initial-bg: transparent;
+  --header-initial-color: var(--text-light); /* White text on hero */
+  --header-scrolled-bg: rgba(
+    0,
+    0,
+    0,
+    0.95
+  ); /* Semi-transparent dark background on scroll */
+  --header-scrolled-color: var(--text-light);
+  --header-hover-color: var(--pink); /* Pink hover for navigation */
+}
+
+/* ---- Base Styles for the Page ---- */
+body {
+  margin: 0;
+  background-color: var(--purple);
+  font-family: var(--font-sans-serif);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* --- Sticky Navigation --- */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  /* Smooth transition for background */
+  transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
+  background-color: var(--header-initial-bg);
+}
+/* Class added by JS on scroll */
+header.scrolled {
+  background-color: var(--header-scrolled-bg);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+nav {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+ul {
+  list-style: none;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: inline-block;
+  font-size: 1rem;
+  padding: 0;
+  font-weight: 500;
+  margin: 0 15px;
+}
+
+li a {
+  display: block;
+  padding: 20px 10px;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+/* Initial and Scrolled Link Color */
+a {
+  text-decoration: none;
+  color: var(--header-initial-color);
+  transition: color 0.3s;
+}
+
+header.scrolled a {
+  color: var(--header-scrolled-color);
+}
+
+/* Hover effect */
+li a:hover {
+  color: var(--header-hover-color);
+  border-bottom: 3px solid var(--header-hover-color);
+}
+
+/* --- Primary Button --- */
+.btn-primary {
+  display: inline-block;
+  background-color: var(--pink);
+  color: var(--text-light);
+  padding: 12px 25px;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, transform 0.2s;
+  box-shadow: 0 5px 15px rgba(232, 62, 140, 0.4);
+}
+
+.btn-primary:hover {
+  background-color: var(--purple);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(232, 62, 140, 0.6);
+}
+
+/* --- Hero Section Redesign --- */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  /* UPDATED: Reduced top padding from 100px to 80px and bottom padding from 40px to 20px */
+  padding: 50px 20px 20px;
+  text-align: center;
+  gap: 30px;
+}
+
+.hero-text-container {
+  color: var(--text-light);
+  width: 90%;
+  max-width: 600px;
+}
+
+.hero-title {
+  color: var(--pink);
+  font-size: clamp(3rem, 7vw, 5rem);
+  margin-bottom: 0.5rem;
+  font-weight: 900;
+}
+
+.hero-subtitle {
+  color: var(--text-light);
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin-top: 0;
+  font-weight: 300;
+}
+
+.hero-image-container {
+  background-color: var(--pink);
+  padding: 5px;
+  border-radius: 50%; /* Circular image frame */
+  box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.1);
+  width: clamp(200px, 40vw, 300px);
+  height: clamp(200px, 40vw, 300px);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 50%;
+  background-color: white;
+}
+
+/* --- Sections --- */
+section {
+  background-color: var(--bg-section);
+  color: var(--text-dark);
+  /* MODIFIED: Reduced top margin from 20px to 0 to reduce the gap below the navigation links. Centered block with auto. */
+  margin: 0 auto 40px auto;
+  max-width: 1000px;
+  padding: clamp(2rem, 5vw, 4rem);
+  font-size: 1.1rem;
+  border-radius: 15px; /* Softer rounded corners */
+  box-shadow: var(--shadow-light);
+}
+section h3 {
+  color: var(--pink);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+/* --- About Section Specifics --- */
+.about-me p {
+  margin-bottom: 1.5rem;
+}
+
+/* --- Skills Marquee Animation Section --- */
+
+/* Keyframe for continuous left movement */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(
+      -100%
+    ); /* Move the full width of the first container */
+  }
+}
+
+.marquee-container {
+  overflow: hidden;
+  padding: 1.5rem 0;
+  white-space: nowrap; /* Prevent wrapping of skill cards */
+  /* Added a subtle gradient mask for a smoother transition effect at the edges */
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #fff 10%,
+    #fff 90%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #fff 10%,
+    #fff 90%,
+    transparent
+  );
+}
+
+.skills-container {
+  display: inline-flex; /* Ensures both containers sit side-by-side */
+  gap: 20px;
+  padding-right: 20px; /* Space between the two duplicated containers */
+  animation: marquee-scroll 30s linear infinite; /* Apply the continuous animation */
+}
+/* Ensure the second container sits perfectly next to the first one */
+.skills-container-2 {
+  padding-right: 0;
+}
+
+.skill-card {
+  flex-shrink: 0;
+  background-color: var(--purple);
+  color: var(--text-light);
+  padding: 10px 25px;
+  border-radius: 25px; /* Pill shape */
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+  /* Override the default hover to avoid breaking the animation */
+  cursor: default;
+}
+
+.skill-card:hover {
+  background-color: var(--pink);
+  transform: none; /* Keep position stable */
+}
+
+/* Pause animation on hover for accessibility */
+.marquee-container:hover .skills-container {
+  animation-play-state: paused;
+}
+
+/* --- Project Cards --- */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px; /* Reduced gap slightly for a tighter layout */
+  justify-content: center;
+}
+.project-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: var(--shadow-light);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+.project-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.project-card h4 {
+  color: var(--purple); /* Changed project title to purple for contrast */
+  margin: 15px 10px 5px;
+  font-size: 1.4em;
+}
+
+.project-card p {
+  padding: 0 15px 15px;
+  font-size: 0.95em;
+  color: #666; /* Softer text color for body */
+  min-height: 50px;
+}
+
+/* --- Secondary Buttons & Go-Top --- */
+.btn-small {
+  display: inline-block;
+  background-color: var(--pink);
+  color: var(--text-light);
+  padding: 8px 15px;
+  text-decoration: none;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-small:hover {
+  background-color: var(--purple);
+}
+
+.parent-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.go-top {
+  border: none;
+  border-radius: 50px; /* Fully rounded button */
+  padding: 10px 20px;
+  font-weight: 600;
+  color: var(--text-light);
+  background-color: var(--pink);
+  transition: background-color 0.3s ease, transform 0.2s;
+  box-shadow: 0 2px 10px rgba(232, 62, 140, 0.5);
+  cursor: pointer;
+}
+
+.go-top:hover {
+  background-color: var(--purple);
+  transform: translateY(-1px);
+}
+
+/* --- Contact Form Styling --- */
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto 40px; /* Centered with bottom margin */
+  padding: 20px;
+  border: 1px solid #f0f0f0;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.contact-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--purple);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(111, 66, 193, 0.2);
+}
+
+.contact-form textarea {
+  resize: vertical;
+}
+
+/* Adjust the primary button for form submission */
+.contact-form .btn-primary {
+  width: 100%;
+  text-align: center;
+  border: none;
+}
+
+/* --- New Footer Email Style --- */
+.footer-email {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 5px; /* Small space between email and social icons */
+}
+
+.footer-email a {
+  color: var(--text-light); /* White link color in footer */
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-email a:hover {
+  color: var(--pink);
+}
+
+/* Remove extra margin from the empty <br> tags in index.html */
+#portfolio-section + br,
+main > br {
+  display: none;
+}
+
+/* --- Footer --- */
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  color: var(--text-light);
+  /* The gap controls space between email, social icons, and copyright text */
+  gap: 15px;
+  font-size: 0.95rem;
+  background-color: rgba(0, 0, 0, 0.2); /* Subtle dark background for footer */
+}
+
+.footer-social a {
+  color: var(--text-light);
+  font-size: 1.8rem;
+  margin: 0 10px;
+  transition: color 0.3s;
+}
+.footer-social a:hover {
+  color: var(--pink); /* Pink hover for footer icons */
+}
+
+/* --- Media Queries for Responsiveness --- */
+@media (min-width: 768px) {
+  /* Desktop/Tablet Hero Layout */
+  .hero-section {
+    flex-direction: row;
+    /* UPDATED: Reduced top padding from 150px to 120px */
+    padding: 50px 50px 80px;
+    text-align: left;
+    gap: 50px;
+  }
+
+  .hero-text-container {
+    width: 50%;
+    margin-right: 5%;
+  }
+
+  .hero-image-container {
+    width: 350px;
+    height: 350px;
+  }
+
+  .main-nav ul {
+    text-align: right;
+    max-width: 1200px;
+    margin-right: auto;
+    padding-right: 20px;
+  }
+}
